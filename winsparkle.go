@@ -97,6 +97,14 @@ func SetDSAPubPEM(pem string) error {
 	return nil
 }
 
+func SetEdDSAPubKey(key string) error {
+	r, _, _ := winsparkle.NewProc("win_sparkle_set_eddsa_public_key").Call(char(key))
+	if r == 0 {
+		return errors.New("invalid EdDSA public key provided")
+	}
+	return nil
+}
+
 // SetAppDetails sets application metadata.
 //
 // Normally, these are taken from VERSIONINFO/StringFileInfo resources,
